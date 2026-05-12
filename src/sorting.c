@@ -156,8 +156,30 @@ int partition(int arr[], int low, int high) {
 }
 
 // ----    NET-ORDERING ALGORITHMS    -----
-void bitonic_sort_s(int arr[], int low, int cnt, int dir) {
+void bitonic_merge_s(int arr[], int low, int cnt, int dir) {
+    if (cnt > 1) {
+        int k = cnt / 2;
+        for (int i = low; i < low + k; i++) {
+            // Comparar y cambiar según la dirección deseada
+            if (dir == (arr[i] > arr[i + k])) {
+                swap(&arr[i], &arr[i + k]);
+            }
+        }
+        bitonic_merge_s(arr, low, k, dir);
+        bitonic_merge_s(arr, low + k, k, dir);
+    }
+}
 
+void bitonic_sort_s(int arr[], int low, int cnt, int dir) {
+    if (cnt > 1) {
+        int k = cnt / 2;
+        // Sort in ascending order since (dir == 1)
+        bitonic_sort_s(arr, low, k, 1);
+        // Sort in descending order since (dir == 0)
+        bitonic_sort_s(arr, low + k, k, 0);
+        // Merge the whole sequence in ascending order (dir == 1)
+        bitonic_merge_s(arr, low, cnt, dir);
+    }
 }
 
 /*************************************
@@ -241,7 +263,6 @@ void counting_sort_p(int arr[], int n, int t) {
     for (int i = 1; i <= k; i++) {
         count[i] += count[i - 1];
     }
-
     // Loose stability if we parallelize this loop, so we keep it sequential (OPTIMIZATION)
     for (int i = n - 1; i >= 0; i--) {
         output[count[arr[i]] - 1] = arr[i];
@@ -338,8 +359,59 @@ void quick_sort_p(int arr[], int low, int high, int t) {
 }
 
 // ----    NET-ORDERING ALGORITHMS    -----
-void bitonic_sort_p(int arr[], int low, int cnt, int dir, int t) {
+void bitonic_merge_p(int arr[], int low, int cnt, int dir, int t) {
+    if (cnt > 1) {
+        int k = cnt / 2;
+        if (cnt > SEQ_THRESHOLD) {
+            #pragma omp parallel for num_threads(t)
+            for (int i = low; i < low + k; i++) {
+                if (dir == (arr[i] > arr[i + k])) {
+                    int temp = arr[i];
+                    arr[i] = arr[i + k];
+                    arr[i + k] = temp;
+                }
+            }
+        } else {
+            // Using sequential merge for small subarrays to avoid excessive task creation (optimization)
+            for (int i = low; i < low + k; i++) {
+                if (dir == (arr[i] > arr[i + k])) {
+                    int temp = arr[i];
+                    arr[i] = arr[i + k];
+                    arr[i + k] = temp;
+                }
+            }
+        }
+        // Recursively merge the two halves in parallel with shared access to arr and private copies of low, k, and dir
+        #pragma omp task shared(arr) firstprivate(low, k, dir)
+        bitonic_merge_p(arr, low, k, dir, t);
+        
+        #pragma omp task shared(arr) firstprivate(low, k, dir)
+        bitonic_merge_p(arr, low + k, k, dir, t);
+        
+        #pragma omp taskwait
+    }
+}
 
+void bitonic_sort_p(int arr[], int low, int cnt, int dir, int t) {
+    if (cnt > 1) {
+        int k = cnt / 2;
+        
+        // Exit condition for small subarrays to avoid excessive task creation (optimization)
+        if (cnt < SEQ_THRESHOLD) {
+            bitonic_sort_s(arr, low, cnt, dir);
+            return;
+        }
+
+        #pragma omp task shared(arr) firstprivate(low, k)
+        bitonic_sort_p(arr, low, k, 1, t);
+        
+        #pragma omp task shared(arr) firstprivate(low, k)
+        bitonic_sort_p(arr, low + k, k, 0, t);
+        
+        #pragma omp taskwait
+        // Merge the whole ordered sequence in ascending order (dir == 1)
+        bitonic_merge_p(arr, low, cnt, dir, t);
+    }
 }
 
 /*************************************

@@ -62,6 +62,7 @@ void quick_sort_p(int arr[], int low, int high, int t);
 
 // ----    NET-ORDERING ALGORITHMS    -----
 // Bitonic Sort O()
+void bitonic_merge_p(int arr[], int low, int cnt, int dir, int t);
 void bitonic_sort_p(int arr[], int low, int cnt, int dir, int t);
 
 /*************************************
