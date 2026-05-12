@@ -1,0 +1,79 @@
+Algoritmo,N,T_Threads,Promedio_Segundos
+Odd-Even Sec,1000,Secuencial,0.000668
+Odd-Even Sec,10000,Secuencial,0.065161
+Odd-Even Sec,100000,Secuencial,8.451796
+Merge Sort Sec,1000,Secuencial,5.1e-05
+Merge Sort Sec,10000,Secuencial,0.000631
+Merge Sort Sec,100000,Secuencial,0.007619
+Merge Sort Sec,1000000,Secuencial,0.074028
+Merge Sort Sec,10000000,Secuencial,0.778357
+Bitonic Sort Sec,1024,Secuencial,0.0
+Bitonic Sort Sec,16384,Secuencial,0.0
+Bitonic Sort Sec,131072,Secuencial,0.0
+Bitonic Sort Sec,1048576,Secuencial,0.0
+Bitonic Sort Sec,8388608,Secuencial,0.0
+Odd-Even Par,1000,1,0.000887
+Odd-Even Par,1000,2,0.002462
+Odd-Even Par,1000,4,0.001314
+Odd-Even Par,1000,8,0.001443
+Odd-Even Par,1000,12,0.007449
+Odd-Even Par,10000,1,0.055303
+Odd-Even Par,10000,2,0.026927
+Odd-Even Par,10000,4,0.017811
+Odd-Even Par,10000,8,0.015424
+Odd-Even Par,10000,12,0.017576
+Odd-Even Par,100000,1,8.543751
+Odd-Even Par,100000,2,4.221274
+Odd-Even Par,100000,4,2.734152
+Odd-Even Par,100000,8,1.873522
+Odd-Even Par,100000,12,2.963799
+Merge Sort Par,1000,1,5.2e-05
+Merge Sort Par,1000,2,6e-05
+Merge Sort Par,1000,4,5.8e-05
+Merge Sort Par,1000,8,0.002153
+Merge Sort Par,1000,12,0.000855
+Merge Sort Par,10000,1,0.000651
+Merge Sort Par,10000,2,0.001977
+Merge Sort Par,10000,4,0.002393
+Merge Sort Par,10000,8,0.000888
+Merge Sort Par,10000,12,0.004522
+Merge Sort Par,100000,1,0.007473
+Merge Sort Par,100000,2,0.004796
+Merge Sort Par,100000,4,0.007441
+Merge Sort Par,100000,8,0.006711
+Merge Sort Par,100000,12,0.006106
+Merge Sort Par,1000000,1,0.075161
+Merge Sort Par,1000000,2,0.039715
+Merge Sort Par,1000000,4,0.027609
+Merge Sort Par,1000000,8,0.018185
+Merge Sort Par,1000000,12,0.014797
+Merge Sort Par,10000000,1,0.812515
+Merge Sort Par,10000000,2,0.42235
+Merge Sort Par,10000000,4,0.323536
+Merge Sort Par,10000000,8,0.197636
+Merge Sort Par,10000000,12,0.14761
+Bitonic Sort Par,1024,1,0.0
+Bitonic Sort Par,1024,2,0.0
+Bitonic Sort Par,1024,4,0.0
+Bitonic Sort Par,1024,8,0.0
+Bitonic Sort Par,1024,12,0.0
+Bitonic Sort Par,16384,1,0.0
+Bitonic Sort Par,16384,2,0.0
+Bitonic Sort Par,16384,4,0.0
+Bitonic Sort Par,16384,8,0.0
+Bitonic Sort Par,16384,12,0.0
+Bitonic Sort Par,131072,1,0.0
+Bitonic Sort Par,131072,2,0.0
+Bitonic Sort Par,131072,4,0.0
+Bitonic Sort Par,131072,8,0.0
+Bitonic Sort Par,131072,12,0.0
+Bitonic Sort Par,1048576,1,0.0
+Bitonic Sort Par,1048576,2,0.0
+Bitonic Sort Par,1048576,4,0.0
+Bitonic Sort Par,1048576,8,0.0
+Bitonic Sort Par,1048576,12,0.0
+Bitonic Sort Par,8388608,1,0.0
+Bitonic Sort Par,8388608,2,0.0
+Bitonic Sort Par,8388608,4,0.0
+Bitonic Sort Par,8388608,8,0.0
+Bitonic Sort Par,8388608,12,0.0
